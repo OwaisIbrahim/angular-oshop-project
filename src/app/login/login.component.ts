@@ -1,6 +1,5 @@
+import { AuthService } from './../auth.service';
 import { Component } from '@angular/core';
-import * as firebase from 'firebase';
-import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @Component({
@@ -10,13 +9,13 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class LoginComponent {
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private authService: AuthService) {
   }
 
   login() {
     // 1. Enable Google Signin in sign in method on firebase console
     // 2. Add the following line 
-    this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    this.authService.login();
   }
   
 }
