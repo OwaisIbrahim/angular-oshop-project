@@ -1,3 +1,4 @@
+import { AppUser } from './../models/app-user';
 import { AuthService } from './../auth.service';   
 import { Component } from '@angular/core';
 
@@ -7,12 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./bs-navbar.component.css']
 })
 export class BsNavbarComponent {
-
-  constructor(public authService: AuthService) {
+  appUser: AppUser;
+  
+  constructor(private auth: AuthService) {
+    auth.appUser$.subscribe(appUser => this.appUser = appUser);
    }
 
   logout() {
-    this.authService.logout();
+    this.auth.logout();
   }
 
 }
