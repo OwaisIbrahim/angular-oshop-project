@@ -37,8 +37,7 @@ export class ShoppingCartService {
     let cartId = await this.getOrCreateCartId();
     let item$ = this.getItem(cartId, product.$key);
     item$.take(1).subscribe( (item: any) => {
-      if(item.$exists()) item$.update({ quantity: item.quantity + 1 });
-      else item$.set({ product: product, quantity: 1 });
+      item$.update({ product: product, quantity: (item.quantity || 0) + 1 });
     })
   }
 
